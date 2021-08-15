@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         }, ContextCompat.getMainExecutor(this))
 
         val localModel = LocalModel.Builder()
-            .setAbsoluteFilePath("object_detection.tflite")
+            .setAssetFilePath("mnasnet_1.3_224_1_metadata_1.tflite")
             .build()
         val customObjectDetectorOptions = CustomObjectDetectorOptions.Builder(localModel)
             .setDetectorMode(CustomObjectDetectorOptions.STREAM_MODE)
