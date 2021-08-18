@@ -5,15 +5,38 @@
     tools:context=".MainActivity"
     >
 
-    <RelativeLayout
-        android:id="@+id/parentLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+    <FrameLayout android:id="@+id/parentLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="5dip"
+        >
         <androidx.camera.view.PreviewView
             android:id="@+id/previewView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+        </androidx.camera.view.PreviewView>
 
-    </RelativeLayout>
+        <Button
+            android:id="@+id/ClearButton"
+            android:layout_width="83dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/clear"
+            tools:ignore="RtlHardcoded" />
+
+        <Button
+            android:id="@+id/startstopButton"
+            android:layout_width="83dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="10dp"
+            android:text="@string/start"
+            tools:ignore="RtlHardcoded" />
+
+
+    </FrameLayout>
+
+
 </layout>
