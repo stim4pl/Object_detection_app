@@ -1,42 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity"
-    >
-
-    <FrameLayout android:id="@+id/parentLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:padding="5dip"
-        >
-        <androidx.camera.view.PreviewView
-            android:id="@+id/previewView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </androidx.camera.view.PreviewView>
-
-        <Button
-            android:id="@+id/ClearButton"
-            android:layout_width="83dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|left"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="@string/clear"
-            tools:ignore="RtlHardcoded" />
-
-        <Button
-            android:id="@+id/startstopButton"
-            android:layout_width="83dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
-            android:layout_marginBottom="10dp"
-            android:text="@string/start"
-            tools:ignore="RtlHardcoded" />
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
 
-    </FrameLayout>
+    <Button
+        android:id="@+id/OpenCamera"
+        android:layout_width="290dp"
+        android:layout_height="131dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="32dp"
+        android:text="Start :)"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.638"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.438" />
 
-
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>
