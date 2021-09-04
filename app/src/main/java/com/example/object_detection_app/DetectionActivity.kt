@@ -3,6 +3,7 @@ package com.example.object_detection_app
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.DisplayMetrics
 import android.util.Log
 import android.util.Size
 import android.view.View
@@ -26,7 +27,7 @@ import com.google.mlkit.vision.objects.ObjectDetection
 import com.google.mlkit.vision.objects.ObjectDetector
 import com.google.mlkit.vision.objects.custom.CustomObjectDetectorOptions
 
-class DetectionActivity: AppCompatActivity()  {
+class DetectionActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetectionBinding
     private lateinit var objectDetector: ObjectDetector
@@ -34,7 +35,6 @@ class DetectionActivity: AppCompatActivity()  {
     private lateinit var task: Task<List<DetectedObject>>
     private var detectedObjects: ArrayList<View> = arrayListOf<View>()
     private var detect: Int = 0
-    private var amountDetected: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +51,7 @@ class DetectionActivity: AppCompatActivity()  {
         }, ContextCompat.getMainExecutor(this))
 
         val localModel = LocalModel.Builder()
-                .setAssetFilePath("mnasnet_0.50_224_1_metadata_1.tflite")
+                .setAssetFilePath("mnasnet_1.3_224_1_metadata_1.tflite")
                 .build()
         val customObjectDetectorOptions = CustomObjectDetectorOptions.Builder(localModel)
                 .setDetectorMode(CustomObjectDetectorOptions.STREAM_MODE)
@@ -86,8 +86,6 @@ class DetectionActivity: AppCompatActivity()  {
         if (detectedObjects.isNotEmpty()) {
             for (item in detectedObjects) {
                 binding.parentLayout.removeView(item)
-                amountDetected -= 1
-                Log.d("MainActivity", "Dec")
             }
         }
     }
@@ -96,18 +94,21 @@ class DetectionActivity: AppCompatActivity()  {
     private fun bindPreview(cameraProvider: ProcessCameraProvider) {
 
 
+        val size = Size(1280, 720)
+
         val preview = Preview.Builder()
-                .setTargetResolution(Size(1280, 720))
+                .setTargetResolution(size)
                 .build()
         val cameraSelector = CameraSelector.Builder()
                 .requireLensFacing(CameraSelector.LENS_FACING_BACK)
                 .build()
         preview.setSurfaceProvider(binding.previewView.surfaceProvider)
 
-        val audio = Audio(this,"en","GB")
+        val audio = Audio(this, "en", "GB")
+
 
         val imageAnalysis = ImageAnalysis.Builder()
-                .setTargetResolution(Size(1280, 720))
+                .setTargetResolution(size)
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build()
 
@@ -123,13 +124,11 @@ class DetectionActivity: AppCompatActivity()  {
                 objectDetector
                         .process(processImage)
                         .addOnSuccessListener { objects ->
-                            Log.e("MainActivity", "Error - dziala")
                             clearObjects()
                             for (i in objects) {
                                 val element = Draw(context = this,
                                         rect = i.boundingBox,
                                         text = i.labels.firstOrNull()?.text ?: "Undefined")
-                                amountDetected += 1
                                 detectedObjects.add(element)
 
                                 if (detect == 1) {
