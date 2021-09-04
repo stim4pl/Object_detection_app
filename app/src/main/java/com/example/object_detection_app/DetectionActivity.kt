@@ -94,7 +94,7 @@ class DetectionActivity : AppCompatActivity() {
     private fun bindPreview(cameraProvider: ProcessCameraProvider) {
 
 
-        val size = Size(1280, 720)
+        val size = Size(720, 1280)
 
         val preview = Preview.Builder()
                 .setTargetResolution(size)
